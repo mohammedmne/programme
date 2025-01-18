@@ -1,1 +1,26 @@
 
+#!/bin/bash
+
+# Fonction pour compter les fichiers dans le répertoire actuel
+count_files() {
+  echo $(ls -1 | wc -l)
+}
+
+# Demander à l'utilisateur combien de fichiers sont présents dans le répertoire
+correct_guess=$(count_files)
+user_guess=-1
+
+# Boucle de devinette
+while [ "$user_guess" -ne "$correct_guess" ]; do
+    echo "Devinez combien de fichiers se trouvent dans le répertoire actuel :"
+    read user_guess
+    
+    if [ "$user_guess" -gt "$correct_guess" ]; then
+        echo "C'est trop élevé ! Essayez encore."
+    elif [ "$user_guess" -lt "$correct_guess" ]; then
+        echo "C'est trop bas ! Essayez encore."
+    fi
+done
+
+# Félicitations quand la réponse est correcte
+echo "Félicitations ! Vous avez deviné correctement, il y a $correct_guess fichiers dans le répertoire."
